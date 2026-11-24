@@ -1,0 +1,47 @@
+<section class="card list-card" id="conference-list">
+  <div class="section-title">
+    <div class="icon">📅</div>
+    <div>
+      <h2>Liste des conférences à venir</h2>
+      <p>Cliquez sur une conférence pour afficher ses détails.</p>
+    </div>
+  </div>
+      <div class="conference-grid">
+      @for (conference of list; track conference.id) {
+     <!---   @if (conference.date >= now) { ---->
+        <article
+          class="conference-item"
+          
+        >
+          <!-- Pipe uppercase -->
+          <h3>{{ conference.title | uppercase }}</h3>
+
+          <p>{{ conference.description }}</p>
+
+          <!-- Pipe date -->
+          <p><strong>Date :</strong> {{ conference.date | date:'dd/MM/yyyy' }}</p>
+          <p><strong>Lieu :</strong> {{ conference.location }}</p>
+          <p>
+            <strong>Places restantes :</strong>
+            {{ conference.maxParticipants - conference.nbParticipants }}   
+          </p>
+
+          <!-- Directive ngClass -->
+          <button
+          [ngClass]="{ 'btn-green': conference.maxParticipants - conference.nbParticipants >= 10, 
+    'btn-red': conference.maxParticipants - conference.nbParticipants == 0, 
+    'btn-orange': conference.maxParticipants - conference.nbParticipants > 0 && conference.maxParticipants - conference.nbParticipants < 10 }"
+          (click)="inscription(conference)"
+            type="button"
+            class="inscription-btn">
+            S'inscrire
+          </button>
+
+           <!---    ---->
+          <!---  [disabled]="placesRestantes(conference) === 0"---->
+        </article>
+   } 
+    <!---  } ---->
+    </div>
+
+ </section>

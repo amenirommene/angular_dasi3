@@ -1,0 +1,20 @@
+<section class="card" id="amis">
+  <div class="icon">👥</div>
+  <div>
+    <h2>Liste des amis</h2>
+    <input [value]="friendName">  {{ friendName }}
+    <input [(ngModel)]="friendName">
+   
+    <ul>
+        @for(f of friendsList; track f){
+            @if(f.toUpperCase().includes(friendName.toUpperCase())){
+                <li>{{ f }}</li>
+            } 
+        }
+        @empty{
+           Tableau vide
+        }
+    
+    </ul>
+  </div>
+</section>
